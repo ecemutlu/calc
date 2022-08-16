@@ -151,7 +151,6 @@ const Calculator = (props) => {
                   <td>{el.operator}</td>
                   <td>{el.operand2}</td>
                   <td>{el.result}</td>
-                  {console.log(el.result)}
                 </tr>
               );
             })}
