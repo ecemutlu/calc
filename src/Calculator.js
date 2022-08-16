@@ -123,7 +123,6 @@ const Calculator = (props) => {
                   const val = compute();
                   setResult(val);
                   store(val);
-                  console.log(history);
                   setOperandNumber(1);
                 }}
               >
