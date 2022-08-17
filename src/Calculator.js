@@ -45,6 +45,10 @@ const Calculator = (props) => {
         return number1 + number2;
       case "-":
         return number1 - number2;
+      case "x":
+        return number1 * number2;
+      case "/":
+        return number1 / number2;
       default:
         return result;
     }
@@ -52,40 +56,71 @@ const Calculator = (props) => {
 
   return (
     <div>
-      <input type="checkbox" defaultChecked={props.mode} />
-
-      <Link to="/">Ana sayfaya dön</Link>
+      <style type="text/css">
+        {`
+       .btn-flat 
+       {
+          background-color: pink;
+          color: white;
+          border: #dc3586;
+          active-border-color: #dc3586;
+          bs-btn-disabled-bg: #dc3586;
+          bs-btn-disabled-border-color: #dc3586;
+        }
+        .btn-flat:hover {
+          background-color:#dc3586; 
+          color: white;
+        }
+    `}
+      </style>
       <h1>
         {number2 === 0
           ? `${number1}${operator}`
           : `${number1}${operator}${number2}`}
       </h1>
       <h1>{result}</h1>
-      <div className="buttons">
+      <div className="buttons" bg="light" variant="light">
         <Container>
           <Row>
             <Col xs>
-              <Button onClick={() => update(1)}>1</Button>
+              <Button className="btn-flat" onClick={() => update(1)}>
+                1
+              </Button>
 
-              <Button onClick={() => update(2)}>2</Button>
+              <Button className="btn-flat" onClick={() => update(2)}>
+                2
+              </Button>
 
-              <Button onClick={() => update(3)}>3</Button>
+              <Button className="btn-flat" onClick={() => update(3)}>
+                3
+              </Button>
             </Col>
             <Col xs>
-              <Button onClick={reset}>C</Button>
+              <Button className="btn-flat" onClick={reset}>
+                C
+              </Button>
             </Col>
           </Row>
           <Row className="justify-content-md-center">
             <Col>
-              <Button onClick={() => update(4)}>4</Button>
+              <Button className="btn-flat" onClick={() => update(4)}>
+                4
+              </Button>
 
-              <Button onClick={() => update(5)}>5</Button>
+              <Button className="btn-flat" onClick={() => update(5)}>
+                5
+              </Button>
 
-              <Button onClick={() => update(6)}>6</Button>
+              <Button className="btn-flat" onClick={() => update(6)}>
+                6
+              </Button>
             </Col>
             <Col>
               <Button
-                disabled={params.mode === "substraction"}
+                className="btn-flat"
+                disabled={
+                  !(params.mode === "addition" || params.mode === "all")
+                }
                 onClick={() => {
                   setOperator("+");
                   setOperandNumber(2);
@@ -97,13 +132,22 @@ const Calculator = (props) => {
           </Row>
           <Row>
             <Col>
-              <Button onClick={() => update(7)}>7</Button>
-              <Button onClick={() => update(8)}>8</Button>
-              <Button onClick={() => update(9)}>9</Button>
+              <Button className="btn-flat" onClick={() => update(7)}>
+                7
+              </Button>
+              <Button className="btn-flat" onClick={() => update(8)}>
+                8
+              </Button>
+              <Button className="btn-flat" onClick={() => update(9)}>
+                9
+              </Button>
             </Col>
             <Col>
               <Button
-                disabled={params.mode === "addition"}
+                className="btn-flat"
+                disabled={
+                  !(params.mode === "substraction" || params.mode === "all")
+                }
                 onClick={() => {
                   setOperator("-");
                   setOperandNumber(2);
@@ -115,15 +159,42 @@ const Calculator = (props) => {
           </Row>
           <Row>
             <Col>
-              <Button onClick={() => update(0)}>0</Button>
+              <Button className="btn-flat" onClick={() => update(0)}>
+                0
+              </Button>
+              <Button
+                className="btn-flat"
+                disabled={
+                  !(params.mode === "multiplication" || params.mode === "all")
+                }
+                onClick={() => {
+                  setOperator("x");
+                  setOperandNumber(2);
+                }}
+              >
+                x
+              </Button>
+              <Button
+                className="btn-flat"
+                disabled={
+                  !(params.mode === "division" || params.mode === "all")
+                }
+                onClick={() => {
+                  setOperator(":");
+                  setOperandNumber(2);
+                }}
+              >
+                /
+              </Button>
             </Col>
             <Col>
               <Button
+                className="btn-flat"
                 onClick={() => {
                   const val = compute();
                   setResult(val);
                   store(val);
-                  setOperandNumber(1);
+                  setOperandNumber(0);
                 }}
               >
                 =
